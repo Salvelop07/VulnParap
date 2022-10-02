@@ -10,18 +10,18 @@ requests.packages.urllib3.disable_warnings()
 user_agent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"
 header = {"User-Agent": user_agent_}
 
-banner =f"""
+banner = f"""
 
-{Fore.LIGHTCYAN_EX}   
+{Fore.LIGHTCYAN_EX}
 
-____   ____    .__        __________                                     
-\   \ /   /_ __|  |   ____\______   \_____ ____________    _____   ______
- \   Y   /  |  \  |  /    \|     ___/\__  \\\_  __ \__  \  /     \ /  ___/
-  \     /|  |  /  |_|   |  \    |     / __ \|  | \// __ \|  Y Y  \\\___ \ 
-   \___/ |____/|____/___|  /____|    (____  /__|  (____  /__|_|  /____  >
-                         \/               \/           \/      \/     \/  {Fore.YELLOW}v1.0
+____   ____    .__        __________
+\   \ /   /_ __|  |   ____\______   \_____ ____________ ________   ______
+ \   Y   /  |  \  |  /    \|     ___/\__  \\\_  __ \__  \_____  \ /  ___/
+  \     /|  |  /  |_|   |  \    |     / __ \|  | \// __ \|   ___/\\\___ \
+   \___/ |____/|____/___|  /____|    (____  /__|  (____  /  |    /____  >
+                         \/               \/           \/|  |         \/  {Fore.YELLOW}v1.0
 
-{Fore.MAGENTA} by c0deNinja
+{Fore.MAGENTA} by Salvador H
 
 
 """
@@ -34,6 +34,7 @@ with open(f"payloads/rce.txt", "r") as f:
 
 with open(f"payloads/openredirect.txt", "r") as f:
     openredirect_list = [x.strip() for x in f.readlines()]
+
 
 def get_params(domain: str) -> str:
     try:
@@ -63,23 +64,29 @@ def get_params(domain: str) -> str:
         for item, value in dic.items():
             if value in rce_list:
                 payloads.append("RCE")
-                print(f"{Fore.MAGENTA}[+] {Fore.CYAN}-{Fore.WHITE} Link: {Fore.YELLOW}{item} {Fore.GREEN} Injection Point: {Fore.LIGHTBLUE_EX}{value} {Fore.WHITE} Payload: {Fore.CYAN} RCE")
+                print(f"{Fore.MAGENTA}[+] {Fore.CYAN}-{Fore.WHITE} Link: {Fore.YELLOW}{item} {
+                      Fore.GREEN} Injection Point: {Fore.LIGHTBLUE_EX}{value} {Fore.WHITE} Payload: {Fore.CYAN} RCE")
             if value in ssrf_list:
                 payloads.append("SSRF")
-                print(f"{Fore.MAGENTA}[+] {Fore.CYAN}-{Fore.WHITE} Link: {Fore.YELLOW}{item} {Fore.GREEN} Injection Point: {Fore.LIGHTBLUE_EX}{value} {Fore.WHITE} Payload: {Fore.CYAN} SSRF")
+                print(f"{Fore.MAGENTA}[+] {Fore.CYAN}-{Fore.WHITE} Link: {Fore.YELLOW}{item} {
+                      Fore.GREEN} Injection Point: {Fore.LIGHTBLUE_EX}{value} {Fore.WHITE} Payload: {Fore.CYAN} SSRF")
             if value in openredirect_list:
                 payloads.append("OPEN REDIRECT")
-                print(f"{Fore.MAGENTA}[+] {Fore.CYAN}-{Fore.WHITE} Link: {Fore.YELLOW}{item} {Fore.GREEN} Injection Point: {Fore.LIGHTBLUE_EX}{value} {Fore.WHITE} Payload: {Fore.CYAN} OPEN REDIRECT")
+                print(f"{Fore.MAGENTA}[+] {Fore.CYAN}-{Fore.WHITE} Link: {Fore.YELLOW}{item} {
+                      Fore.GREEN} Injection Point: {Fore.LIGHTBLUE_EX}{value} {Fore.WHITE} Payload: {Fore.CYAN} OPEN REDIRECT")
             if not payloads:
-                print(f"{Fore.MAGENTA}[+] {Fore.CYAN}-{Fore.WHITE} Link: {Fore.YELLOW}{item} {Fore.GREEN} Injection Point: {Fore.LIGHTBLUE_EX}{value}")
+                print(f"{Fore.MAGENTA}[+] {Fore.CYAN}-{Fore.WHITE} Link: {Fore.YELLOW}{
+                      item} {Fore.GREEN} Injection Point: {Fore.LIGHTBLUE_EX}{value}")
     except requests.exceptions.ConnectionError:
-        print (Fore.RED + "Connection Error")
+        print(Fore.RED + "Connection Error")
     except requests.exceptions.MissingSchema:
-        print (Fore.RED + "Please use: http://site.com")
+        print(Fore.RED + "Please use: http://site.com")
     except UnicodeDecodeError:
         pass
 
+
 if __name__ == "__main__":
     print(banner)
-    print(f"{Fore.WHITE} Searching for vulnerable paramaters for {Fore.CYAN}SSRF, RCE, Open Redirect{Fore.GREEN}\n")
+    print(f"{Fore.WHITE} Searching for vulnerable paramaters for {
+          Fore.CYAN}SSRF, RCE, Open Redirect{Fore.GREEN}\n")
     get_params(sys.argv[1])

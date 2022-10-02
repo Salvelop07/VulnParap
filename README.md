@@ -1,12 +1,12 @@
-# vulnparams
+# vulnparap
 
 vulnparamas crawls a page to find and extract parameters from links which can be later use to test for vulnerable parameters.
 
 # INSTALL
 
-git clone https://github.com/gotr00t0day/vulnparams.git
+git clone https://github.com/Salvelop07/vulnparap.git
 
-cd vulnparams
+cd vulnparap
 
 ## USAGE
 
